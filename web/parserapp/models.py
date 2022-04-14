@@ -15,6 +15,8 @@ class DomainModel(models.Model):
     CNAME = ArrayField(models.CharField(max_length=255), blank=True, null=True)
     TXT = ArrayField(models.CharField(max_length=255), blank=True, null=True)
 
+    objects = models.Manager()
+
     def __str__(self):
         return f"{self.url}"
 
@@ -30,9 +32,11 @@ class DomainModel(models.Model):
 
 
 class MxModel(models.Model):
-    container = models.ForeignKey(DomainModel, db_index=True, on_delete=models.CASCADE, related_name='MX')
+    domain = models.ForeignKey(DomainModel, db_index=True, on_delete=models.CASCADE, related_name='MX')
     exchange = models.CharField('Exchange', max_length=255)
     priority = models.IntegerField('Priority', default=0)
+
+    objects = models.Manager()
 
     def __str__(self):
         return f"{self.exchange} {self.priority}"
