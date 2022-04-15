@@ -1,9 +1,11 @@
 from rest_framework.decorators import api_view
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
+from django_filters.rest_framework import DjangoFilterBackend
 from .serializers import DomainSerializer
 from .models import DomainModel
 from .tasks import background_finding_data_from_remote_api
+from .src.filters import DomainFilter
 
 
 @api_view(['GET'])
@@ -21,3 +23,5 @@ def parser_view(request):
 class DomainView(ListAPIView):
     serializer_class = DomainSerializer
     queryset = DomainModel.objects.all()
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = DomainFilter

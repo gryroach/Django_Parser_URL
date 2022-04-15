@@ -18,6 +18,7 @@ Deprecated==1.2.13
 Django==4.0.4
 django-better-admin-arrayfield==1.4.2
 django-bulk-update-or-create==0.3.0
+django-filter==21.1
 djangorestframework==3.13.1
 fake-useragent==0.1.11
 idna==3.3

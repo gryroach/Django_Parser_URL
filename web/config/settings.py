@@ -41,7 +41,8 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'parserapp',
-    'django_better_admin_arrayfield'
+    'django_better_admin_arrayfield',
+    'django_filters'
 ]
 
 MIDDLEWARE = [
