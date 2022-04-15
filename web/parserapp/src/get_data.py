@@ -17,7 +17,7 @@ def find_from_api(in_domain):
             if in_domain in domain['domain']:
                 result.append(domain)
     except Exception as er:
-        logging.warning(f"Error while trying to get domains: {er}")
+        logging.warning(f"Error while trying to get domains for {in_domain}: {er}")
 
     return result
 

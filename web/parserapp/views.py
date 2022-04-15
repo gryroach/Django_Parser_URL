@@ -3,7 +3,7 @@ from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from .serializers import DomainSerializer
 from .models import DomainModel
-from .src.get_data import create_records_db
+from .tasks import background_finding_data_from_remote_api
 
 
 @api_view(['GET'])
@@ -12,9 +12,10 @@ def parser_view(request):
     if request.method == 'GET':
         try:
             url = request.GET.get('url', None)
+            background_finding_data_from_remote_api.delay(url)
         except Exception as er:
             return Response({"success": False, "message": str(er)})
-        return Response(create_records_db(url))
+        return Response("Data sent", status=200)
 
 
 class DomainView(ListAPIView):

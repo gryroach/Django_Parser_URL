@@ -123,6 +123,11 @@ USE_TZ = True
 
 OPEN_API_DOMAIN = os.environ.get('OPEN_API_DOMAIN')
 
+# Celery config
+CELERY_BROKER_URL = 'redis://redis:6379'
+CELERY_TIMEZONE = 'Europe/Moscow'
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
