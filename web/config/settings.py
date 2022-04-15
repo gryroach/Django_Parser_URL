@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'parserapp',
     'django_better_admin_arrayfield',
-    'django_filters'
+    'django_filters',
+    'rest_framework_swagger'
 ]
 
 MIDDLEWARE = [
@@ -58,7 +59,8 @@ MIDDLEWARE = [
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 30
+    'PAGE_SIZE': 30,
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
 
 ROOT_URLCONF = 'config.urls'
@@ -75,6 +77,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': {
+                'staticfiles': 'django.templatetags.static',
+            },
+
         },
     },
 ]

@@ -3,6 +3,7 @@ from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework.filters import OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework_swagger.views import get_swagger_view
 from .serializers import DomainSerializer
 from .models import DomainModel
 from .tasks import background_finding_data_from_remote_api
@@ -27,3 +28,6 @@ class DomainView(ListAPIView):
     filter_backends = (DjangoFilterBackend, OrderingFilter)
     filterset_class = DomainFilter
     ordering_fields = ['url', 'domain', 'country', 'create_date', 'update_date', 'isDead']
+
+
+schema_view = get_swagger_view(title='Domains API')
