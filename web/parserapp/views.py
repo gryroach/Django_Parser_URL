@@ -1,6 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
+from rest_framework.filters import OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from .serializers import DomainSerializer
 from .models import DomainModel
@@ -21,7 +22,8 @@ def parser_view(request):
 
 
 class DomainView(ListAPIView):
-    serializer_class = DomainSerializer
     queryset = DomainModel.objects.all()
-    filter_backends = (DjangoFilterBackend,)
+    serializer_class = DomainSerializer
+    filter_backends = (DjangoFilterBackend, OrderingFilter)
     filterset_class = DomainFilter
+    ordering_fields = ['url', 'domain', 'country', 'create_date', 'update_date', 'isDead']
