@@ -5,7 +5,7 @@ Django API project for parsing all links on a page by URL and getting extended i
 
 ## Description
 
-The service accepts the URL as a get request parameter. 
+The service accepts the URL by POST request. 
 After that, all valid links of the page are parsed. 
 The resulting links are used as a search parameter in the domain database open API. 
 Information about the received domains is recorded in the PostreSQL database in accordance with the URL. 
@@ -73,8 +73,8 @@ $ source env/bin/activate
 ***
 
 ### API
-- GET -> http://127.0.0.1:8000/api/parser?url=<url_for_parsing>- start parsing page by URL
+- POST -> http://127.0.0.1:8000/api/parser - start parsing page by URL
 - GET -> http://127.0.0.1:8000/api/domains - list of all domains with filters and sorting
 
 To get a description of the developed API in Swagger UI format, follow the documentation link:
-http://0.0.0.0:8000/api/docs/
+http://127.0.0.1:8000/api/docs/
