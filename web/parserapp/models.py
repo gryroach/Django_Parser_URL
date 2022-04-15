@@ -1,10 +1,11 @@
 from django.db import models
 from django_better_admin_arrayfield.models.fields import ArrayField
+from bulk_update_or_create import BulkUpdateOrCreateQuerySet
 
 
 class DomainModel(models.Model):
 
-    url = models.URLField('URL', null=False, unique=True)
+    url = models.URLField('URL', null=False)
     domain = models.CharField('domain', max_length=255, blank=False)
     create_date = models.DateTimeField('Create date', null=False)
     update_date = models.DateTimeField('Update date', null=True, blank=True)
@@ -15,7 +16,7 @@ class DomainModel(models.Model):
     CNAME = ArrayField(models.CharField(max_length=255), blank=True, null=True)
     TXT = ArrayField(models.CharField(max_length=255), blank=True, null=True)
 
-    objects = models.Manager()
+    objects = BulkUpdateOrCreateQuerySet.as_manager()
 
     def __str__(self):
         return f"{self.url}"
@@ -36,7 +37,7 @@ class MxModel(models.Model):
     exchange = models.CharField('Exchange', max_length=255)
     priority = models.IntegerField('Priority', default=0)
 
-    objects = models.Manager()
+    objects = BulkUpdateOrCreateQuerySet.as_manager()
 
     def __str__(self):
         return f"{self.exchange} {self.priority}"

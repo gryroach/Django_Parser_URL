@@ -1,22 +1,22 @@
 from rest_framework.decorators import api_view
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
-from .src.parsers import ParserLinks
 from .serializers import DomainSerializer
 from .models import DomainModel
-import logging
+from .src.get_data import create_records_db
 
 
 @api_view(['GET'])
-def temp_list(request):
+def parser_view(request):
 
     if request.method == 'GET':
-        url = request.GET['url']
-        logging.warning(url)
-        result = ParserLinks(url).find_links()
-        return Response(str(result))
+        try:
+            url = request.GET.get('url', None)
+        except Exception as er:
+            return Response({"success": False, "message": str(er)})
+        return Response(create_records_db(url))
 
 
-class DomainView(ListCreateAPIView):
+class DomainView(ListAPIView):
     serializer_class = DomainSerializer
     queryset = DomainModel.objects.all()

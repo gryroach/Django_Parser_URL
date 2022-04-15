@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import temp_list, DomainView
+from .views import parser_view, DomainView
 
 urlpatterns = [
-    path("parser/", temp_list),
+    path("parser/", parser_view),
     path("", DomainView.as_view())
 ]

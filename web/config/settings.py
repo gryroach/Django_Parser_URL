@@ -121,6 +121,7 @@ USE_I18N = True
 
 USE_TZ = True
 
+OPEN_API_DOMAIN = os.environ.get('OPEN_API_DOMAIN')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/

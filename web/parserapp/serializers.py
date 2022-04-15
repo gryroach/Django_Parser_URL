@@ -15,10 +15,3 @@ class DomainSerializer(serializers.ModelSerializer):
         model = DomainModel
         fields = ("url", "domain", "create_date", "update_date",
                   "country", "isDead", "A", "NS", "CNAME", "MX", "TXT")
-
-    def create(self, validated_data):
-        mx_data = validated_data.pop("MX", None)
-        domain = DomainModel.objects.create(**validated_data)
-        for i_mx in mx_data:
-            MxModel.objects.create(domain=domain, **i_mx)
-        return domain
